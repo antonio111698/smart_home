@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href='../static/style.css' />
+	<script src="../static/script.js" type="text/javascript"></script>
+	<title>Sistem casă inteligentă</title>
+</head>
+
+<body onload="getCurrentDate()">
+	<header>
+		<h1>Control casă inteligentă &nbsp; </h1>
+	</header>
+	<hr>
+	<div class="main-content">
+		<h2><p id="currentdate"></p></h2>
+		{% if temperature != 0 and humidity !=0 %}
+		<h2>Temperatura în locuință este : {{ temperature }} &#8451; Umiditate : {{ humidity }}</h2>
+		{% else %}
+		<p>Nu s-a realizat citirea pentru temperatură</p>
+		{% endif %}
+		<br>
+		<form method="POST" action="/temperature">
+		<h2>Introduceți Orașul : <input type="text" name="city">
+			<input type="submit">
+		</h2>
+		</form>
+		<h2>Sistem alarmă</h2>
+		<form method="POST" action="/alarma">
+		<h2>
+			Pornit<input type="radio" value="1" name="radioButton">
+			Oprit<input type="radio" value="0" name="radioButton">
+			<input type="submit">
+		</h2>
+		</form>
+		<h2> Ventilator </h2>
+		<h3>
+			<a href="/ventilator/on" class="button">Porneste</a>
+
+			<a href="/ventilator/off" class="button">Inchide</a>
+		</h3>
+		<h2> Controlul luminii </h2>
+		<h3>
+			LED Albastru ==>
+			{% if ledBlue ==0 %}
+			<a href="/ledBlue/on" class="button">Aprinde</a>
+			{% else %}
+			<a href="/ledBlue/off" class="button">Inchide</a>
+			{% endif %}
+		</h3>
+		<h3>
+			LED Rosu ==>
+			{% if ledRed==0 %}
+			<a href="/ledRed/on" class="button">Aprinde</a>
+			{% else %}
+			<a href="/ledRed/off" class="button">Inchide</a>
+			{% endif %}
+		</h3>
+		<h3>
+			LED Verde ==>
+			{% if ledGreen==0 %}
+			<a href="/ledGreen/on" class="button">Aprinde</a>
+			{% else %}
+			<a href="/ledGreen/off" class="button">Inchide</a>
+			{% endif %}
+		</h3>
+		{%block main%}
+		{%endblock%}
+	</div>
+	<footer id="footer">
+		&copy; 2021.Artimon Antonio
+	</footer>
+</body>
+
+</html>
